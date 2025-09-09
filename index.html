@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muaiman 🩷 Daisya Wedding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+      <h1 class="text-2xl font-bold text-pink-600">Muaiman 🩷 Daisya</h1>
+      <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <li><a href="#home" class="hover:text-pink-500 transition">Home</a></li>
+        <li><a href="#contact" class="hover:text-pink-500 transition">Contact</a></li>
+        <li><a href="#moneygift" class="hover:text-pink-500 transition">Money Gift</a></li>
+        <li><a href="#rsvp" class="hover:text-pink-500 transition">RSVP</a></li>
+      </ul>
+      <button id="menuBtn" class="md:hidden text-gray-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+      <ul class="flex flex-col items-center space-y-4 py-4">
+        <li><a href="#home" class="hover:text-pink-500 transition">Home</a></li>
+        <li><a href="#contact" class="hover:text-pink-500 transition">Contact</a></li>
+        <li><a href="#moneygift" class="hover:text-pink-500 transition">Money Gift</a></li>
+        <li><a href="#rsvp" class="hover:text-pink-500 transition">RSVP</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Video -->
+  <section id="home" class="relative h-screen">
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+      <source src="daisya-muaiman.mov" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white px-4">
+      <h1 class="text-5xl md:text-6xl font-bold">Muaiman 🩷 Daisya</h1>
+      <p class="mt-4 text-xl">You're invited to our wedding celebration</p>
+      <p class="mt-2">📅 15 Novemner 2025 | 🕒 10:00 AM | 📍 Dewan Hikmah</p>
+
+      <!-- Countdown -->
+      <div class="mt-6 text-2xl font-semibold" id="countdown"></div>
+
+      <a href="#rsvp" class="mt-6 px-6 py-3 bg-pink-500 rounded-full text-lg font-semibold shadow hover:bg-pink-600 transition">
+        RSVP Now
+      </a>
+    </div>
+  </section>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+  <button onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+    🎵
+  </button>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white text-center">
+    <h2 class="text-3xl font-bold text-gray-800">Contact Us</h2>
+    <p class="mt-4 text-gray-600">Have any questions? Reach out to us!</p>
+    <div class="mt-6 flex flex-col md:flex-row justify-center gap-6">
+      <div class="p-6 bg-pink-50 rounded-xl shadow-md w-72">
+        <h3 class="text-lg font-semibold">Kham</h3>
+        <p class="text-gray-600 mt-1">📞 +60 1234 5678</p>
+      </div>
+      <div class="p-6 bg-pink-50 rounded-xl shadow-md w-72">
+        <h3 class="text-lg font-semibold">Reen</h3>
+        <p class="text-gray-600 mt-1">📞 +60 8765 4321</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Money Gift Section -->
+  <section id="moneygift" class="py-16 bg-gray-100 text-center">
+    <h2 class="text-3xl font-bold text-gray-800">Send Us Your Love 💝</h2>
+    <p class="mt-4 text-gray-600">If you'd like to contribute, here are our bank details:</p>
+    <div class="mt-6 p-6 bg-white rounded-xl shadow-md inline-block">
+      <p class="text-gray-800 font-semibold">Bank: Maybank</p>
+      <p class="text-gray-800 font-semibold">Account Name: Kham & Reen</p>
+      <p class="text-gray-800 font-semibold">Account Number: 1234 5678 9012</p>
+    </div>
+  </section>
+
+  <!-- RSVP Form -->
+  <section id="rsvp" class="bg-white py-16">
+    <div class="max-w-lg mx-auto shadow-lg rounded-xl p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Confirm Your Attendance</h2>
+      <form id="rsvpForm" class="space-y-4" method="POST">
+        <input name="Name" type="text" placeholder="Your Name" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
+        <input name="Email" type="email" placeholder="Your Email" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
+        <select name="Attendance" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400">
+          <option value="">Will you attend?</option>
+          <option value="Yes">Yes, I will attend 🎉</option>
+          <option value="No">Sorry, I can’t 😢</option>
+        </select>
+        <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">Submit RSVP</button>
+      </form>
+      <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">Thank you! Your RSVP has been submitted 🎉</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 text-center">
+    <p>&copy; 2025 Muaiman 🩷 Daisya Wedding </p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // Countdown
+    const countdownEl = document.getElementById("countdown");
+    const weddingDate = new Date("Dec 25, 2025 18:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    // Background music toggle
+    const bgMusic = document.getElementById("bgMusic");
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+      } else {
+        bgMusic.pause();
+      }
+    }
+
+    // Submit RSVP form to Google Sheets
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxX308Z8Gmv3DTqByiocoNjqu72dUp2TrOJc1QozWb9FqJzbFqnSiZzQLr4y5r_Q55Mrg/exec";
+    const form = document.getElementById("rsvpForm");
+    const successMsg = document.getElementById("successMsg");
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: "POST", body: new FormData(form) })
+        .then(() => {
+          successMsg.classList.remove("hidden");
+          form.reset();
+        })
+        .catch(err => alert("Something went wrong! " + err.message));
+    });
+  </script>
+</body>
+</html>
