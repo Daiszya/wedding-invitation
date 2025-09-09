@@ -34,22 +34,31 @@
     </div>
   </nav>
 
-  
-<!-- Hero Section with Fullscreen Video -->
-<section id="home" class="relative h-screen flex flex-col">
-  <!-- Video takes full space -->
-  <video autoplay muted loop playsinline class="w-full h-full object-cover">
-    <source src="daisya-muaiman.mov" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</section>
+  <!-- Hero Section with Video -->
+  <section id="home" class="relative h-screen">
+    <video id="weddingVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+      <source src="daisya-muaiman.mov" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 bg-black/20">
+      <h1 class="text-5xl md:text-6xl font-bold drop-shadow-lg">Muaiman 🩷 Daisya</h1>
+      <p class="mt-4 text-xl drop-shadow-md">You're invited to our wedding celebration</p>
+      <p class="mt-2 drop-shadow-md">📅 15 November 2025 | 🕒 10:00 AM | 📍 Dewan Hikmah</p>
 
+      <!-- Countdown -->
+      <div class="mt-6 text-2xl font-semibold drop-shadow-lg" id="countdown"></div>
+
+      <a href="#rsvp" class="mt-6 px-6 py-3 bg-pink-500 rounded-full text-lg font-semibold shadow hover:bg-pink-600 transition">
+        RSVP Now
+      </a>
+    </div>
+  </section>
 
   <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mp3">
   </audio>
-  <button onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+  <button id="musicBtn" onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
     🎵
   </button>
 
@@ -69,14 +78,13 @@
     </div>
   </section>
 
-  <!-- Money Gift Section -->
+  <!-- Money Gift Section with QR -->
   <section id="moneygift" class="py-16 bg-gray-100 text-center">
     <h2 class="text-3xl font-bold text-gray-800">Send Us Your Love 💝</h2>
-    <p class="mt-4 text-gray-600">If you'd like to contribute, here are our bank details:</p>
+    <p class="mt-4 text-gray-600">Scan the QR code below to send your contribution:</p>
     <div class="mt-6 p-6 bg-white rounded-xl shadow-md inline-block">
-      <p class="text-gray-800 font-semibold">Bank: Maybank</p>
-      <p class="text-gray-800 font-semibold">Account Name: Kham & Reen</p>
-      <p class="text-gray-800 font-semibold">Account Number: 1234 5678 9012</p>
+      <img src="qr-maybank.png" alt="Money Gift QR Code" class="w-48 h-48 mx-auto rounded-lg shadow-md" />
+      <p class="mt-4 text-gray-800 font-semibold">Thank you for your love & support! 🩷</p>
     </div>
   </section>
 
@@ -114,7 +122,7 @@
 
     // Countdown
     const countdownEl = document.getElementById("countdown");
-    const weddingDate = new Date("Dec 25, 2025 18:00:00").getTime();
+    const weddingDate = new Date("Nov 15, 2025 10:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
@@ -125,17 +133,24 @@
       countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Background music toggle
+    // Background music autoplay
     const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
     function toggleMusic() {
       if (bgMusic.paused) {
         bgMusic.play();
+        musicBtn.innerHTML = "🔇";
       } else {
         bgMusic.pause();
+        musicBtn.innerHTML = "🎵";
       }
     }
+    // Play music automatically on first user interaction (mobile fix)
+    document.body.addEventListener("click", () => {
+      bgMusic.play().catch(() => {});
+    }, { once: true });
 
-    // Submit RSVP form to Google Sheets
+    // RSVP Form Submit
     const scriptURL = "https://script.google.com/macros/s/AKfycbxX308Z8Gmv3DTqByiocoNjqu72dUp2TrOJc1QozWb9FqJzbFqnSiZzQLr4y5r_Q55Mrg/exec";
     const form = document.getElementById("rsvpForm");
     const successMsg = document.getElementById("successMsg");
