@@ -255,7 +255,7 @@
         bgMusic.play().then(() => {
           musicBtn.textContent = "🔇 Stop Music";
           musicBtn.classList.remove("bg-pink-500", "hover:bg-pink-600");
-          musicBtn.classList.add("bg-red-500", "hover:bg-red-600");
+          musicBtn.classList.add("bg-pink-500", "hover:bg-pink-600");
         }).catch(err => {
           console.log("Music play blocked by browser:", err);
           alert("Please tap the button to enable music 🎶");
@@ -268,7 +268,7 @@
 
 
     // RSVP Form Submission
-    const scriptURL = "https://script.google.com/macros/s/AKfycby3ABK-p9cSBt_xcmjySZG0Zla5GTeC78VIDe_Tt_XJn26llNcHVLX4djlaEpeu4AC1FA/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxtAYVMM_NFiuqhisvLQDbfTB6-UXmxc_vNry7HCE-poHPpfzywlzQvuen7HDEistxBRg/exec";
     const form = document.getElementById("rsvpForm");
     const successMsg = document.getElementById("successMsg");
     const guestCount = document.getElementById("guestCount");
