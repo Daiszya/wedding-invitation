@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +11,7 @@
     .floating-label {
       position: relative;
     }
+
     .floating-label input,
     .floating-label select,
     .floating-label textarea {
@@ -21,6 +23,7 @@
       outline: none;
       transition: all 0.2s ease;
     }
+
     .floating-label label {
       position: absolute;
       top: 1rem;
@@ -31,12 +34,13 @@
       background-color: white;
       padding: 0 0.3rem;
     }
-    .floating-label input:focus + label,
-    .floating-label input:not(:placeholder-shown) + label,
-    .floating-label textarea:focus + label,
-    .floating-label textarea:not(:placeholder-shown) + label,
-    .floating-label select:focus + label,
-    .floating-label select:not([value=""]) + label {
+
+    .floating-label input:focus+label,
+    .floating-label input:not(:placeholder-shown)+label,
+    .floating-label textarea:focus+label,
+    .floating-label textarea:not(:placeholder-shown)+label,
+    .floating-label select:focus+label,
+    .floating-label select:not([value=""])+label {
       top: -0.5rem;
       left: 0.8rem;
       font-size: 0.8rem;
@@ -54,9 +58,17 @@
     #successMsg {
       animation: fadeIn 0.5s ease forwards;
     }
+
     @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     /* Section Titles */
@@ -67,6 +79,7 @@
       margin-bottom: 1rem;
       color: #1f2937;
     }
+
     .section-divider {
       width: 80%;
       height: 2px;
@@ -75,17 +88,19 @@
     }
   </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop playsinline>
+  <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
+
   <!-- Floating Music Button -->
-<button id="musicBtn"
-  class="fixed top-4 right-4 z-50 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-  🎵
-</button>
+  <button id="musicBtn"
+    class="fixed top-4 right-4 z-50 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+    🎵
+  </button>
 
   <!-- Wedding Video -->
   <div class="w-full relative">
@@ -121,60 +136,61 @@
 
   <div class="section-divider"></div>
 
- <!-- RSVP Section -->
-<section id="rsvp" class="py-10 bg-white px-6">
-  <h2 class="section-title">RSVP Now 🎉</h2>
-  <form id="rsvpForm" method="POST" class="space-y-5 max-w-lg mx-auto">
-    
-    <!-- Guest 1 Name -->
-    <div class="floating-label">
-      <input name="Guest 1 Name" type="text" placeholder=" " required />
-      <label>Guest 1 Name</label>
-    </div>
+  <!-- RSVP Section -->
+  <section id="rsvp" class="py-10 bg-white px-6">
+    <h2 class="section-title">RSVP Now 🎉</h2>
+    <form id="rsvpForm" method="POST" class="space-y-5 max-w-lg mx-auto">
 
-    <!-- Guest Count -->
-    <div class="floating-label">
-      <select id="guestCount" name="Guest Count" required>
-        <option value="" selected disabled hidden></option>
-        <option value="1">1 Guest</option>
-        <option value="2">2 Guests</option>
-      </select>
-      <label>Guest Count</label>
-    </div>
+      <!-- Guest 1 Name -->
+      <div class="floating-label">
+        <input name="Guest 1 Name" type="text" placeholder=" " required />
+        <label>Guest 1 Name</label>
+      </div>
 
-    <!-- Guest 2 Name (hidden by default) -->
-    <div id="guest2Field" class="floating-label hidden">
-      <input name="Guest 2 Name" type="text" placeholder=" " />
-      <label>Guest 2 Name</label>
-    </div>
+      <!-- Guest Count -->
+      <div class="floating-label">
+        <select id="guestCount" name="Guest Count" required>
+          <option value="" selected disabled hidden></option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+        </select>
+        <label>Guest Count</label>
+      </div>
 
-    <!-- Attendance -->
-    <div class="floating-label">
-      <select id="attendance" name="Attendance" required>
-        <option value="" selected disabled hidden></option>
-        <option value="Yes">Yes, I will attend 🎉</option>
-        <option value="No">Sorry, I can’t make it 😢</option>
-      </select>
-      <label>Will You Attend?</label>
-    </div>
+      <!-- Guest 2 Name (hidden by default) -->
+      <div id="guest2Field" class="floating-label hidden">
+        <input name="Guest 2 Name" type="text" placeholder=" " />
+        <label>Guest 2 Name</label>
+      </div>
 
-    <!-- Message -->
-    <div class="floating-label">
-      <textarea name="Message" placeholder=" " rows="3"></textarea>
-      <label>Your Message</label>
-    </div>
+      <!-- Attendance -->
+      <div class="floating-label">
+        <select id="attendance" name="Attendance" required>
+          <option value="" selected disabled hidden></option>
+          <option value="Yes">Yes, I will attend 🎉</option>
+          <option value="No">Sorry, I can’t make it 😢</option>
+        </select>
+        <label>Will You Attend?</label>
+      </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">
-      Submit RSVP
-    </button>
+      <!-- Message -->
+      <div class="floating-label">
+        <textarea name="Message" placeholder=" " rows="3"></textarea>
+        <label>Your Message</label>
+      </div>
 
-    <!-- Success Message -->
-    <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">
-      🎉 Thank you! Your RSVP has been submitted!
-    </p>
-  </form>
-</section>
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">
+        Submit RSVP
+      </button>
+
+      <!-- Success Message -->
+      <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">
+        🎉 Thank you! Your RSVP has been submitted!
+      </p>
+    </form>
+  </section>
 
 
   <div class="section-divider"></div>
@@ -206,53 +222,63 @@
       countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
+    // Background Music Control
     const bgMusic = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let isPlaying = false;
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
 
-musicBtn.addEventListener("click", () => {
-  if (isPlaying) {
+    // Always start paused — browsers require user interaction
     bgMusic.pause();
-    musicBtn.textContent = "🎵"; // Show play icon when paused
-  } else {
-    bgMusic.play().catch(err => console.log("Music play failed:", err));
-    musicBtn.textContent = "🔇"; // Show mute icon when playing
-  }
-  isPlaying = !isPlaying;
-});
+
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.textContent = "🎵"; // Show play icon
+      } else {
+        bgMusic.play().then(() => {
+          musicBtn.textContent = "🔇"; // Show mute icon
+        }).catch(err => {
+          console.log("Music play blocked by browser:", err);
+          alert("Please tap the button to enable music 🎶");
+        });
+      }
+      isPlaying = !isPlaying;
+    });
+
 
 
     // RSVP Form Submission
     const scriptURL = "https://script.google.com/macros/s/AKfycby3ABK-p9cSBt_xcmjySZG0Zla5GTeC78VIDe_Tt_XJn26llNcHVLX4djlaEpeu4AC1FA/exec";
-const form = document.getElementById("rsvpForm");
-const successMsg = document.getElementById("successMsg");
-const guestCount = document.getElementById("guestCount");
-const guest2Field = document.getElementById("guest2Field");
+    const form = document.getElementById("rsvpForm");
+    const successMsg = document.getElementById("successMsg");
+    const guestCount = document.getElementById("guestCount");
+    const guest2Field = document.getElementById("guest2Field");
 
-// Show/hide Guest 2 Name based on Guest Count
-guestCount.addEventListener("change", () => {
-  if (guestCount.value === "2") {
-    guest2Field.classList.remove("hidden");
-    guest2Field.querySelector("input").setAttribute("required", "true");
-  } else {
-    guest2Field.classList.add("hidden");
-    guest2Field.querySelector("input").removeAttribute("required");
-    guest2Field.querySelector("input").value = "";
-  }
-});
+    // Show/hide Guest 2 Name based on Guest Count
+    guestCount.addEventListener("change", () => {
+      if (guestCount.value === "2") {
+        guest2Field.classList.remove("hidden");
+        guest2Field.querySelector("input").setAttribute("required", "true");
+      } else {
+        guest2Field.classList.add("hidden");
+        guest2Field.querySelector("input").removeAttribute("required");
+        guest2Field.querySelector("input").value = "";
+      }
+    });
 
-// RSVP Form Submission
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  fetch(scriptURL, { method: "POST", body: new FormData(form) })
-    .then(() => {
-      successMsg.classList.remove("hidden");
-      form.reset();
-      guest2Field.classList.add("hidden"); // Hide Guest 2 field again
-    })
-    .catch(err => alert("Something went wrong! " + err.message));
-});
+    // RSVP Form Submission
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: "POST", body: new FormData(form) })
+        .then(() => {
+          successMsg.classList.remove("hidden");
+          form.reset();
+          guest2Field.classList.add("hidden"); // Hide Guest 2 field again
+        })
+        .catch(err => alert("Something went wrong! " + err.message));
+    });
 
   </script>
 </body>
+
 </html>
