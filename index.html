@@ -96,10 +96,10 @@
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- Floating Music Button -->
+  <!-- Music Control Button -->
   <button id="musicBtn"
-    class="fixed top-4 right-4 z-50 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-    🎵
+    class="fixed bottom-5 right-5 z-50 bg-pink-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-pink-600 transition">
+    🎶 Please Turn On Music
   </button>
 
   <!-- Wedding Video -->
@@ -115,12 +115,24 @@
     <p class="text-center text-gray-500 mb-4">Have any questions? Reach out to us!</p>
     <div class="space-y-4">
       <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
-        <p class="font-bold text-lg">Kham</p>
-        <p class="text-gray-600">📞 +60 1234 5678</p>
+        <p class="font-bold text-lg">Dr Hj Hasbee - Bapa Pengantin Perempuan</p>
+        <p class="text-gray-600">📞 +60 138155235</p>
       </div>
       <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
-        <p class="font-bold text-lg">Reen</p>
-        <p class="text-gray-600">📞 +60 8765 4321</p>
+        <p class="font-bold text-lg">Dr Hjh Siti Zaliha - Ibu Pengantin Perempuan</p>
+        <p class="text-gray-600">📞 +60 138158435</p>
+      </div>
+      <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
+        <p class="font-bold text-lg">Sukarno - Bapa Pengantin Lelaki</p>
+        <p class="text-gray-600">📞 +60 178093959</p>
+      </div>
+      <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
+        <p class="font-bold text-lg">Dayang Majenah - Ibu Pengantin Lelaki</p>
+        <p class="text-gray-600">📞 +60 128893959</p>
+      </div>
+      <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
+        <p class="font-bold text-lg">Ainur Nisha - Kakak Pengantin Lelaki</p>
+        <p class="text-gray-600">📞 +60 122733959</p>
       </div>
     </div>
   </section>
@@ -223,20 +235,27 @@
     }, 1000);
 
     // Background Music Control
+    // Background Music Control
     const bgMusic = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
     let isPlaying = false;
 
-    // Always start paused — browsers require user interaction
+    // Ensure music is paused by default
     bgMusic.pause();
 
     musicBtn.addEventListener("click", () => {
       if (isPlaying) {
+        // Pause music
         bgMusic.pause();
-        musicBtn.textContent = "🎵"; // Show play icon
+        musicBtn.textContent = "🎶 Please Turn On Music";
+        musicBtn.classList.remove("bg-red-500", "hover:bg-red-600");
+        musicBtn.classList.add("bg-pink-500", "hover:bg-pink-600");
       } else {
+        // Play music
         bgMusic.play().then(() => {
-          musicBtn.textContent = "🔇"; // Show mute icon
+          musicBtn.textContent = "🔇 Stop Music";
+          musicBtn.classList.remove("bg-pink-500", "hover:bg-pink-600");
+          musicBtn.classList.add("bg-red-500", "hover:bg-red-600");
         }).catch(err => {
           console.log("Music play blocked by browser:", err);
           alert("Please tap the button to enable music 🎶");
@@ -244,6 +263,7 @@
       }
       isPlaying = !isPlaying;
     });
+
 
 
 
