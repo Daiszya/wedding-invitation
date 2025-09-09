@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muaiman 🩷 Daisya Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap"
+    rel="stylesheet" />
   <style>
     /* Floating Labels */
     .floating-label {
@@ -87,8 +89,10 @@
       margin: 1.5rem auto;
     }
 
-    /* Fade-out effect for landing screen */
+    /* Apply gradient pink background to landing page */
     #landingScreen {
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4);
+      font-family: 'Poppins', sans-serif;
       opacity: 1;
       transition: opacity 1s ease;
     }
@@ -98,23 +102,43 @@
       pointer-events: none;
     }
 
-    /* Wedding video fade-in effect */
-    #videoContainer {
-      opacity: 0;
-      transition: opacity 1.2s ease;
+    /* Elegant title font */
+    #landingScreen h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #d946ef;
+      /* Elegant pink */
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
     }
 
-    #videoContainer.fade-in {
-      opacity: 1;
+    /* Glassmorphic translucent button */
+    #openBtn {
+      padding: 14px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.3);
+      transition: all 0.3s ease-in-out;
+      font-family: 'Poppins', sans-serif;
     }
 
-    #loadingOverlay {
-      transition: opacity 0.4s ease;
-      opacity: 0;
+    #openBtn:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.5);
     }
 
-    #loadingOverlay:not(.hidden) {
-      opacity: 1;
+    /* Subtitle below the button */
+    #landingScreen p {
+      color: #fff;
+      opacity: 0.85;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      font-style: italic;
     }
   </style>
 </head>
@@ -123,18 +147,18 @@
 
   <!-- Landing Screen -->
   <div id="landingScreen"
-    class="fixed inset-0 bg-white flex flex-col justify-center items-center z-50 text-center transition-all duration-700">
-    <h1 class="text-3xl font-bold text-pink-600 mb-4 tracking-wide">Muaiman 🩷 Daisya</h1>
+    class="fixed inset-0 flex flex-col justify-center items-center z-50 text-center transition-all duration-700">
 
-    <!-- Elegant Translucent Button -->
-    <button id="openBtn"
-      class="px-8 py-3 rounded-full text-pink-600 font-semibold text-lg shadow-md backdrop-blur-md bg-pink-200/60 border border-pink-300 transition-all duration-300 ease-in-out hover:bg-pink-300/70 hover:scale-105 hover:shadow-lg">
+    <!-- Elegant Title -->
+    <h1 class="mb-6">Muaiman & Daisya</h1>
+
+    <!-- Glass Button -->
+    <button id="openBtn">
       Click to Open Invitation
     </button>
 
-    <p class="mt-4 text-gray-500 text-sm italic">
-      Please turn up your volume for the best experience
-    </p>
+    <!-- Subtitle -->
+    <p>Please turn up your volume for the best experience </p>
   </div>
 
   <!-- Background Music -->
