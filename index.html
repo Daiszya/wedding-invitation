@@ -3,103 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muaiman 🩷 Daisya Wedding</title>
+  <title>Our Wedding Invitation 💍</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Floating Labels */
+    .floating-label {
+      position: relative;
+    }
+    .floating-label input,
+    .floating-label select,
+    .floating-label textarea {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      width: 100%;
+      background-color: white;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .floating-label label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      color: #9ca3af;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      background-color: white;
+      padding: 0 0.3rem;
+    }
+    .floating-label input:focus + label,
+    .floating-label input:not(:placeholder-shown) + label,
+    .floating-label textarea:focus + label,
+    .floating-label textarea:not(:placeholder-shown) + label,
+    .floating-label select:focus + label,
+    .floating-label select:not([value=""]) + label {
+      top: -0.5rem;
+      left: 0.8rem;
+      font-size: 0.8rem;
+      color: #ec4899;
+    }
+    /* Success Animation */
+    #successMsg {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    /* Section Titles */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+    .section-divider {
+      width: 80%;
+      height: 2px;
+      background: #f1f1f1;
+      margin: 1.5rem auto;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans">
-
-  <!-- Hero Section with Video -->
-  <section id="home" class="relative h-screen">
-    <video id="weddingVideo" autoplay muted playsinline loop class="absolute inset-0 w-full h-full object-cover">
-      <source src="daisya-muaiman.mov" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </section>
-
+<body class="bg-gray-50 text-gray-800">
   <!-- Background Music -->
   <audio id="bgMusic" autoplay loop playsinline>
-    <source src="music.mp3" type="audio/mp3">
+    <source src="your-music.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- Wedding Video -->
+  <div class="w-full relative">
+    <video id="weddingVideo" autoplay muted playsinline loop class="w-full h-auto">
+      <source src="your-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
   <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-white text-center">
-    <h2 class="text-3xl font-bold text-gray-800">Contact Us</h2>
-    <p class="mt-4 text-gray-600">Have any questions? Reach out to us!</p>
-    <div class="mt-6 flex flex-col md:flex-row justify-center gap-6">
-      <div class="p-6 bg-pink-50 rounded-xl shadow-md w-72">
-        <h3 class="text-lg font-semibold">Kham</h3>
-        <p class="text-gray-600 mt-1">📞 +60 1234 5678</p>
+  <section id="contact" class="py-10 px-6 bg-white shadow-md">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="text-center text-gray-500 mb-4">Have any questions? Reach out to us!</p>
+    <div class="space-y-4">
+      <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
+        <p class="font-bold text-lg">Kham</p>
+        <p class="text-gray-600">📞 +60 1234 5678</p>
       </div>
-      <div class="p-6 bg-pink-50 rounded-xl shadow-md w-72">
-        <h3 class="text-lg font-semibold">Reen</h3>
-        <p class="text-gray-600 mt-1">📞 +60 8765 4321</p>
+      <div class="bg-pink-50 rounded-xl p-4 shadow text-center">
+        <p class="font-bold text-lg">Reen</p>
+        <p class="text-gray-600">📞 +60 8765 4321</p>
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
 
   <!-- Countdown Section -->
-  <section id="countdown-section" class="py-16 bg-gray-100 text-center">
-    <h2 class="text-3xl font-bold text-gray-800">Countdown to Our Wedding 💍</h2>
-    <p class="mt-4 text-gray-600">We can't wait to celebrate with you!</p>
-    <div id="countdown" class="mt-6 text-4xl font-bold text-pink-600"></div>
+  <section id="countdownSection" class="py-10 bg-gray-50 text-center">
+    <h2 class="section-title">⏳ Countdown to Our Wedding</h2>
+    <p class="text-gray-500 mb-4">We can't wait to celebrate with you!</p>
+    <p id="countdown" class="text-pink-600 font-bold text-3xl"></p>
   </section>
 
-  <!-- Money Gift Section with QR -->
-  <section id="moneygift" class="py-16 bg-gray-100 text-center">
-    <h2 class="text-3xl font-bold text-gray-800">Send Us Your Love 💝</h2>
-    <p class="mt-4 text-gray-600">Scan the QR code below to send your contribution:</p>
-    <div class="mt-6 p-6 bg-white rounded-xl shadow-md inline-block">
-      <img src="qr-maybank.jpg" alt="Money Gift QR Code" class="w-48 h-48 mx-auto rounded-lg shadow-md" />
-      <p class="mt-4 text-gray-800 font-semibold">Thank you for your love & support! 🩷</p>
-    </div>
-  </section>
+  <div class="section-divider"></div>
 
-  <!-- RSVP Form -->
-  <section id="rsvp" class="bg-white py-16">
-    <div class="max-w-lg mx-auto shadow-lg rounded-xl p-6">
-      <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Confirm Your Attendance</h2>
-      <form id="rsvpForm" class="space-y-4" method="POST">
-        <!-- How Many Guests -->
-        <label class="block text-gray-700 font-medium">How many guests (including yourself) will be attending? <span class="text-red-500">*</span></label>
-        <select id="guestCount" name="Guest Count" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400">
-          <option value="">Select</option>
+  <!-- RSVP Section -->
+  <section id="rsvp" class="py-10 bg-white px-6">
+    <h2 class="section-title">RSVP Now 🎉</h2>
+    <form id="rsvpForm" method="POST" class="space-y-5 max-w-lg mx-auto">
+      <div class="floating-label">
+        <input name="Guest Name" type="text" placeholder=" " required />
+        <label>Your Name</label>
+      </div>
+      <div class="floating-label">
+        <select id="guestCount" name="Guest Count" required>
+          <option value="">Select Guests</option>
           <option value="1">1 Guest</option>
           <option value="2">2 Guests</option>
         </select>
-
-        <!-- Name Inputs -->
-        <div id="guest1Field" class="hidden">
-          <input name="Guest 1 Name" type="text" placeholder="Guest 1 Name" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
-        </div>
-        <div id="guest2Field" class="hidden">
-          <input name="Guest 2 Name" type="text" placeholder="Guest 2 Name" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
-        </div>
-
-        <!-- Attendance -->
-        <select name="Attendance" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400">
-          <option value="">Will you attend?</option>
-          <option value="Yes">Yes, I will attend 🎉</option>
-          <option value="No">Sorry, I can’t 😢</option>
-        </select>
-
-        <!-- Message / Wish -->
-        <textarea name="Message" placeholder="Leave a message or wish for the bride and groom ❤️" rows="4" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400"></textarea>
-
-        <!-- Submit Button -->
-        <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">
-          Submit RSVP
-        </button>
-      </form>
+        <label>Guest Count</label>
+      </div>
+      <div class="floating-label">
+        <textarea name="Message" placeholder=" " rows="3"></textarea>
+        <label>Your Message</label>
+      </div>
+      <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">
+        Submit RSVP
+      </button>
       <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">🎉 Thank you! Your RSVP has been submitted!</p>
-    </div>
+    </form>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-6 text-center">
-    <p>&copy; 2025 Muaiman 🩷 Daisya Wedding </p>
-  </footer>
+  <div class="section-divider"></div>
 
-  <!-- JS -->
+  <!-- Money Gift QR Section -->
+  <section id="moneyGift" class="py-10 bg-gray-50 text-center">
+    <h2 class="section-title">Send Us Your Love 💝</h2>
+    <p class="text-gray-500 mb-4">Scan the QR code below to send your contribution:</p>
+    <img src="your-qr.png" alt="QR Code" class="mx-auto w-40 shadow-lg rounded-lg" />
+  </section>
+
+  <!-- JavaScript -->
   <script>
     // Countdown
     const countdownEl = document.getElementById("countdown");
@@ -107,34 +150,37 @@
     setInterval(() => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
-      if (distance < 0) {
-        countdownEl.innerHTML = "🎉 It's Wedding Day! 🎉";
-        return;
-      }
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Force Background Music + Video Autoplay on Mobile & Desktop
+    // Autoplay Fix for iOS + Chrome Mobile
     const bgMusic = document.getElementById("bgMusic");
-    const weddingVideo = document.getElementById("weddingVideo");
-
-    // Attempt autoplay immediately
-    window.addEventListener("load", async () => {
-      try {
-        await weddingVideo.play();
-        await bgMusic.play();
-      } catch (e) {
-        console.log("Trying silent unmute trick...");
-        bgMusic.muted = true;
-        await bgMusic.play();
+    window.addEventListener("load", () => {
+      bgMusic.muted = true;
+      bgMusic.play().then(() => {
         setTimeout(() => {
-          bgMusic.muted = false; // Unmute after start
+          bgMusic.muted = false;
         }, 500);
-      }
+      }).catch(err => console.log("Autoplay blocked:", err));
+    });
+
+    // RSVP Form Submission
+    const scriptURL = "https://script.google.com/macros/s/AKfycby3ABK-p9cSBt_xcmjySZG0Zla5GTeC78VIDe_Tt_XJn26llNcHVLX4djlaEpeu4AC1FA/exec";
+    const form = document.getElementById("rsvpForm");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: "POST", body: new FormData(form) })
+        .then(() => {
+          successMsg.classList.remove("hidden");
+          form.reset();
+        })
+        .catch(err => alert("Something went wrong! " + err.message));
     });
   </script>
 </body>
