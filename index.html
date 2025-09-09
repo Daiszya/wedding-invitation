@@ -87,23 +87,25 @@
       margin: 1.5rem auto;
     }
 
-    /* Fade-in animation when page loads */
+    /* Fade-out effect for landing screen */
     #landingScreen {
       opacity: 1;
+      transition: opacity 1s ease;
     }
 
-    /* Fade-out when button clicked */
     #landingScreen.fade-out {
       opacity: 0;
-      transform: scale(1.05);
       pointer-events: none;
-      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    /* Elegant translucent button */
-    #openBtn {
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
+    /* Wedding video fade-in effect */
+    #videoContainer {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    #videoContainer.fade-in {
+      opacity: 1;
     }
   </style>
 </head>
@@ -127,19 +129,18 @@
     </p>
   </div>
 
-
-
   <!-- Background Music -->
   <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Wedding Video -->
-  <div class="w-full relative">
-    <video id="weddingVideo" autoplay muted playsinline loop class="w-full h-auto">
+  <div id="videoContainer" class="w-full relative opacity-0 transition-opacity duration-1000">
+    <video id="weddingVideo" muted playsinline loop class="w-full h-auto">
       <source src="daisya-muaiman.mov" type="video/mp4" />
     </video>
   </div>
+
 
   <!-- Contact Section -->
   <section id="contact" class="py-10 px-6 bg-white shadow-md">
@@ -265,15 +266,35 @@
       countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Click to Open Invitation
     const landingScreen = document.getElementById("landingScreen");
     const openBtn = document.getElementById("openBtn");
     const bgMusic = document.getElementById("bgMusic");
+    const videoContainer = document.getElementById("videoContainer");
+    const weddingVideo = document.getElementById("weddingVideo");
 
     openBtn.addEventListener("click", () => {
-      landingScreen.style.display = "none";
-      bgMusic.play().catch(err => console.log("Music autoplay blocked:", err));
+      // Start fading out the landing screen
+      landingScreen.classList.add("fade-out");
+
+      // Start playing music instantly
+      bgMusic.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
+
+      // Delay the video fade-in until landing fades away
+      setTimeout(() => {
+        videoContainer.classList.add("fade-in");
+        weddingVideo.play().catch(err => {
+          console.log("Video autoplay blocked:", err);
+        });
+
+        // Hide landing screen completely after fade
+        setTimeout(() => {
+          landingScreen.style.display = "none";
+        }, 1000);
+      }, 300);
     });
+
 
     // RSVP Guest 2 Toggle
     const guestCount = document.getElementById("guestCount");
