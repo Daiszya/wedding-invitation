@@ -89,18 +89,43 @@
     }
 
     /* Fade-out effect for landing screen */
-    /* Landing Screen Background */
+    /* Landing Screen Styling */
     #landingScreen {
       background-color: #ffe6f1;
-      /* Light pink background */
+      /* Soft light pink background */
       opacity: 1;
       transition: opacity 1s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
-    /* Fade out effect */
+    /* Fade-out effect */
     #landingScreen.fade-out {
       opacity: 0;
       pointer-events: none;
+    }
+
+    /* Wedding video fade-in effect */
+    #videoContainer {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    #videoContainer.fade-in {
+      opacity: 1;
+    }
+
+    /* Loading overlay fade */
+    #loadingOverlay {
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    #loadingOverlay:not(.hidden) {
+      opacity: 1;
     }
 
     /* Elegant cursive font for names */
@@ -108,11 +133,12 @@
       font-family: 'Great Vibes', cursive;
       font-size: 3rem;
       color: #ffffff;
-      /* White text */
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      /* White font */
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Glassmorphic See-through Button */
+    /* Glassmorphic see-through button */
     #openBtn {
       padding: 12px 36px;
       border-radius: 50px;
@@ -120,14 +146,16 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.4);
       color: #ffffff;
-      /* White button text */
+      /* White text */
       font-size: 1.2rem;
       font-weight: bold;
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
+    /* Hover effect for button */
     #openBtn:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.05);
@@ -139,7 +167,7 @@
       color: #ffffff;
       /* White subtitle */
       opacity: 0.9;
-      margin-top: 12px;
+      margin-top: 15px;
       font-style: italic;
       font-size: 0.95rem;
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
