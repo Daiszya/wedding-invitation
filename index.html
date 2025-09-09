@@ -87,41 +87,23 @@
       margin: 1.5rem auto;
     }
 
-    /* Landing Screen */
-    /* Fade-in animation for landing screen */
+    /* Fade-in animation when page loads */
     #landingScreen {
-      position: fixed;
-      inset: 0;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 50;
-      padding: 20px;
+      opacity: 1;
+    }
+
+    /* Fade-out when button clicked */
+    #landingScreen.fade-out {
       opacity: 0;
-      animation: fadeInLanding 1s ease forwards;
+      transform: scale(1.05);
+      pointer-events: none;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    @keyframes fadeInLanding {
-      from {
-        opacity: 0;
-        transform: scale(0.96);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* Subtle glowing effect on hover */
+    /* Elegant translucent button */
     #openBtn {
-      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-    }
-
-    #openBtn:hover {
-      box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
     }
   </style>
 </head>
@@ -129,20 +111,22 @@
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Landing Screen -->
-  <div id="landingScreen" class="text-center">
+  <div id="landingScreen"
+    class="fixed inset-0 bg-white flex flex-col justify-center items-center z-50 text-center transition-all duration-700">
     <h1 class="text-3xl font-bold text-pink-600 mb-4 tracking-wide">Muaiman 🩷 Daisya</h1>
     <p class="text-gray-600 mb-6 text-lg">You're invited to celebrate our special day!</p>
 
-    <!-- Elegant Button -->
+    <!-- Elegant Translucent Button -->
     <button id="openBtn"
-      class="relative px-8 py-3 rounded-full text-white font-semibold text-lg shadow-lg transition-all duration-500 ease-in-out bg-gradient-to-r from-pink-400 via-pink-500 to-rose-500 hover:scale-105 hover:shadow-pink-300 hover:brightness-110">
+      class="px-8 py-3 rounded-full text-pink-600 font-semibold text-lg shadow-md backdrop-blur-md bg-pink-200/60 border border-pink-300 transition-all duration-300 ease-in-out hover:bg-pink-300/70 hover:scale-105 hover:shadow-lg">
       Click to Open Invitation
     </button>
 
     <p class="mt-4 text-gray-500 text-sm italic">
-      Increase sound volume for the best experience
+      Please turn up your volume for the best experience
     </p>
   </div>
+
 
 
   <!-- Background Music -->
