@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Wedding Invitation 💍</title>
+  <title>Muaiman 🩷 Daisya Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Floating Labels */
@@ -42,14 +42,23 @@
       font-size: 0.8rem;
       color: #ec4899;
     }
+
+    /* Fix Guest Count Dropdown */
+    .floating-label select {
+      padding: 1rem 0.75rem;
+      appearance: none;
+      background-color: white;
+    }
+
     /* Success Animation */
     #successMsg {
-      animation: fadeIn 0.6s ease forwards;
+      animation: fadeIn 0.5s ease forwards;
     }
     @keyframes fadeIn {
       0% { opacity: 0; transform: scale(0.9); }
       100% { opacity: 1; transform: scale(1); }
     }
+
     /* Section Titles */
     .section-title {
       font-size: 1.5rem;
@@ -67,6 +76,7 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
   <!-- Background Music -->
   <audio id="bgMusic" autoplay loop playsinline>
     <source src="music.mp3" type="audio/mpeg" />
@@ -111,12 +121,12 @@
     <h2 class="section-title">RSVP Now 🎉</h2>
     <form id="rsvpForm" method="POST" class="space-y-5 max-w-lg mx-auto">
       <div class="floating-label">
-        <input name="Guest Name" type="text" placeholder=" " required />
+        <input name="Guest 1 Name" type="text" placeholder=" " required />
         <label>Your Name</label>
       </div>
       <div class="floating-label">
         <select id="guestCount" name="Guest Count" required>
-          <option value="">Select Guests</option>
+          <option value="" selected disabled hidden></option>
           <option value="1">1 Guest</option>
           <option value="2">2 Guests</option>
         </select>
@@ -142,6 +152,11 @@
     <img src="qr-maybank.jpg" alt="QR Code" class="mx-auto w-40 shadow-lg rounded-lg" />
   </section>
 
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6 text-center">
+    <p>&copy; 2025 Muaiman 🩷 Daisya Wedding</p>
+  </footer>
+
   <!-- JavaScript -->
   <script>
     // Countdown
@@ -157,22 +172,37 @@
       countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Autoplay Fix for iOS + Chrome Mobile
+    // Autoplay Music (100ms Fade-In)
     const bgMusic = document.getElementById("bgMusic");
-    window.addEventListener("load", () => {
-      bgMusic.muted = true;
-      bgMusic.play().then(() => {
+    async function playMusic() {
+      try {
+        bgMusic.volume = 0;
+        bgMusic.muted = true;
+        await bgMusic.play();
         setTimeout(() => {
           bgMusic.muted = false;
-        }, 500);
-      }).catch(err => console.log("Autoplay blocked:", err));
-    });
+          let vol = 0;
+          const fade = setInterval(() => {
+            if (vol < 1) {
+              vol += 0.1;
+              bgMusic.volume = vol;
+            } else {
+              clearInterval(fade);
+            }
+          }, 100);
+        }, 100);
+      } catch (err) {
+        console.log("Autoplay blocked, waiting for first interaction…");
+        document.body.addEventListener("touchstart", () => bgMusic.play(), { once: true });
+        document.body.addEventListener("click", () => bgMusic.play(), { once: true });
+      }
+    }
+    window.addEventListener("load", playMusic);
 
     // RSVP Form Submission
     const scriptURL = "https://script.google.com/macros/s/AKfycby3ABK-p9cSBt_xcmjySZG0Zla5GTeC78VIDe_Tt_XJn26llNcHVLX4djlaEpeu4AC1FA/exec";
     const form = document.getElementById("rsvpForm");
     const successMsg = document.getElementById("successMsg");
-
     form.addEventListener("submit", e => {
       e.preventDefault();
       fetch(scriptURL, { method: "POST", body: new FormData(form) })
