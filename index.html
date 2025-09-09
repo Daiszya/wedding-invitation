@@ -86,21 +86,40 @@
       background: #f1f1f1;
       margin: 1.5rem auto;
     }
+
+    /* Landing Screen */
+    #landingScreen {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      text-align: center;
+      padding: 20px;
+    }
   </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 
+  <!-- Landing Screen -->
+  <div id="landingScreen">
+    <h1 class="text-3xl font-bold text-pink-600 mb-4">💌 Muaiman 🩷 Daisya Wedding</h1>
+    <p class="text-gray-600 mb-6">You're invited to celebrate our special day!</p>
+    <button id="openBtn"
+      class="bg-pink-500 text-white px-6 py-3 rounded-full shadow-lg text-lg font-semibold hover:bg-pink-600 transition">
+      Click to Open Invitation 🎉
+    </button>
+    <p class="mt-4 text-gray-400 text-sm">Turn on your sound for the best experience 🎶</p>
+  </div>
+
   <!-- Background Music -->
   <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
-
-  <!-- Music Control Button -->
-  <button id="musicBtn"
-    class="fixed bottom-5 right-5 z-50 bg-pink-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-pink-600 transition">
-    🎶 Please Turn On Music
-  </button>
 
   <!-- Wedding Video -->
   <div class="w-full relative">
@@ -204,7 +223,6 @@
     </form>
   </section>
 
-
   <div class="section-divider"></div>
 
   <!-- Money Gift QR Section -->
@@ -234,47 +252,20 @@
       countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Background Music Control
-    // Background Music Control
+    // Click to Open Invitation
+    const landingScreen = document.getElementById("landingScreen");
+    const openBtn = document.getElementById("openBtn");
     const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    let isPlaying = false;
 
-    // Ensure music is paused by default
-    bgMusic.pause();
-
-    musicBtn.addEventListener("click", () => {
-      if (isPlaying) {
-        // Pause music
-        bgMusic.pause();
-        musicBtn.textContent = "🎶 Please Turn On Music";
-        musicBtn.classList.remove("bg-red-500", "hover:bg-red-600");
-        musicBtn.classList.add("bg-pink-500", "hover:bg-pink-600");
-      } else {
-        // Play music
-        bgMusic.play().then(() => {
-          musicBtn.textContent = "🔇 Stop Music";
-          musicBtn.classList.remove("bg-pink-500", "hover:bg-pink-600");
-          musicBtn.classList.add("bg-pink-500", "hover:bg-pink-600");
-        }).catch(err => {
-          console.log("Music play blocked by browser:", err);
-          alert("Please tap the button to enable music 🎶");
-        });
-      }
-      isPlaying = !isPlaying;
+    openBtn.addEventListener("click", () => {
+      landingScreen.style.display = "none";
+      bgMusic.play().catch(err => console.log("Music autoplay blocked:", err));
     });
 
-
-
-
-    // RSVP Form Submission
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxtAYVMM_NFiuqhisvLQDbfTB6-UXmxc_vNry7HCE-poHPpfzywlzQvuen7HDEistxBRg/exec";
-    const form = document.getElementById("rsvpForm");
-    const successMsg = document.getElementById("successMsg");
+    // RSVP Guest 2 Toggle
     const guestCount = document.getElementById("guestCount");
     const guest2Field = document.getElementById("guest2Field");
 
-    // Show/hide Guest 2 Name based on Guest Count
     guestCount.addEventListener("change", () => {
       if (guestCount.value === "2") {
         guest2Field.classList.remove("hidden");
@@ -287,17 +278,20 @@
     });
 
     // RSVP Form Submission
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxtAYVMM_NFiuqhisvLQDbfTB6-UXmxc_vNry7HCE-poHPpfzywlzQvuen7HDEistxBRg/exec"; // Replace this!
+    const form = document.getElementById("rsvpForm");
+    const successMsg = document.getElementById("successMsg");
+
     form.addEventListener("submit", e => {
       e.preventDefault();
       fetch(scriptURL, { method: "POST", body: new FormData(form) })
         .then(() => {
           successMsg.classList.remove("hidden");
           form.reset();
-          guest2Field.classList.add("hidden"); // Hide Guest 2 field again
+          guest2Field.classList.add("hidden");
         })
         .catch(err => alert("Something went wrong! " + err.message));
     });
-
   </script>
 </body>
 
