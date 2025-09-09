@@ -107,6 +107,15 @@
     #videoContainer.fade-in {
       opacity: 1;
     }
+
+    #loadingOverlay {
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    #loadingOverlay:not(.hidden) {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -245,6 +254,13 @@
     <img src="qr-maybank.jpg" alt="QR Code" class="mx-auto w-40 shadow-lg rounded-lg" />
   </section>
 
+  <!-- Loading Screen -->
+  <div id="loadingOverlay"
+    class="hidden fixed inset-0 bg-white bg-opacity-90 z-50 flex flex-col items-center justify-center">
+    <div class="animate-spin rounded-full h-16 w-16 border-4 border-pink-400 border-t-transparent"></div>
+    <p class="mt-4 text-pink-600 font-semibold text-lg">Submitting your RSVP...</p>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-6 text-center">
     <p>&copy; 2025 Muaiman 🩷 Daisya Wedding</p>
@@ -314,16 +330,33 @@
     const scriptURL = "https://script.google.com/macros/s/AKfycbxtAYVMM_NFiuqhisvLQDbfTB6-UXmxc_vNry7HCE-poHPpfzywlzQvuen7HDEistxBRg/exec"; // Replace this!
     const form = document.getElementById("rsvpForm");
     const successMsg = document.getElementById("successMsg");
+    const loadingOverlay = document.getElementById("loadingOverlay");
 
     form.addEventListener("submit", e => {
       e.preventDefault();
+
+      // Show the loading overlay
+      loadingOverlay.classList.remove("hidden");
+
       fetch(scriptURL, { method: "POST", body: new FormData(form) })
         .then(() => {
+          // Hide the loader after success
+          loadingOverlay.classList.add("hidden");
+
+          // Show success message
           successMsg.classList.remove("hidden");
           form.reset();
           guest2Field.classList.add("hidden");
+
+          // Hide success message after 3s
+          setTimeout(() => {
+            successMsg.classList.add("hidden");
+          }, 3000);
         })
-        .catch(err => alert("Something went wrong! " + err.message));
+        .catch(err => {
+          loadingOverlay.classList.add("hidden");
+          alert("Something went wrong! " + err.message);
+        });
     });
   </script>
 </body>
