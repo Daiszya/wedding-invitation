@@ -8,23 +8,18 @@
 </head>
 <body class="bg-gray-50 font-sans">
 
-
-
   <!-- Hero Section with Video -->
   <section id="home" class="relative h-screen">
-    <video id="weddingVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <video id="weddingVideo" autoplay muted playsinline loop class="absolute inset-0 w-full h-full object-cover">
       <source src="daisya-muaiman.mov" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </section>
 
   <!-- Background Music -->
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" autoplay loop playsinline>
     <source src="music.mp3" type="audio/mp3">
   </audio>
-  <button id="musicBtn" onclick="toggleMusic()" class="fixed bottom-5 right-5 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
-    🎵
-  </button>
 
   <!-- Contact Section -->
   <section id="contact" class="py-16 bg-white text-center">
@@ -42,6 +37,13 @@
     </div>
   </section>
 
+  <!-- Countdown Section -->
+  <section id="countdown-section" class="py-16 bg-gray-100 text-center">
+    <h2 class="text-3xl font-bold text-gray-800">Countdown to Our Wedding 💍</h2>
+    <p class="mt-4 text-gray-600">We can't wait to celebrate with you!</p>
+    <div id="countdown" class="mt-6 text-4xl font-bold text-pink-600"></div>
+  </section>
+
   <!-- Money Gift Section with QR -->
   <section id="moneygift" class="py-16 bg-gray-100 text-center">
     <h2 class="text-3xl font-bold text-gray-800">Send Us Your Love 💝</h2>
@@ -57,16 +59,38 @@
     <div class="max-w-lg mx-auto shadow-lg rounded-xl p-6">
       <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Confirm Your Attendance</h2>
       <form id="rsvpForm" class="space-y-4" method="POST">
-        <input name="Name" type="text" placeholder="Your Name" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
-        <input name="Email" type="email" placeholder="Your Email" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
+        <!-- How Many Guests -->
+        <label class="block text-gray-700 font-medium">How many guests (including yourself) will be attending? <span class="text-red-500">*</span></label>
+        <select id="guestCount" name="Guest Count" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400">
+          <option value="">Select</option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+        </select>
+
+        <!-- Name Inputs -->
+        <div id="guest1Field" class="hidden">
+          <input name="Guest 1 Name" type="text" placeholder="Guest 1 Name" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
+        </div>
+        <div id="guest2Field" class="hidden">
+          <input name="Guest 2 Name" type="text" placeholder="Guest 2 Name" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400" />
+        </div>
+
+        <!-- Attendance -->
         <select name="Attendance" required class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400">
           <option value="">Will you attend?</option>
           <option value="Yes">Yes, I will attend 🎉</option>
           <option value="No">Sorry, I can’t 😢</option>
         </select>
-        <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">Submit RSVP</button>
+
+        <!-- Message / Wish -->
+        <textarea name="Message" placeholder="Leave a message or wish for the bride and groom ❤️" rows="4" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-pink-400"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition">
+          Submit RSVP
+        </button>
       </form>
-      <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">Thank you! Your RSVP has been submitted 🎉</p>
+      <p id="successMsg" class="hidden mt-4 text-green-600 font-medium text-center">🎉 Thank you! Your RSVP has been submitted!</p>
     </div>
   </section>
 
@@ -77,19 +101,16 @@
 
   <!-- JS -->
   <script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    menuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
     // Countdown
     const countdownEl = document.getElementById("countdown");
     const weddingDate = new Date("Nov 15, 2025 10:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
+      if (distance < 0) {
+        countdownEl.innerHTML = "🎉 It's Wedding Day! 🎉";
+        return;
+      }
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -97,35 +118,23 @@
       countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
 
-    // Background music autoplay
+    // Force Background Music + Video Autoplay on Mobile & Desktop
     const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    function toggleMusic() {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        musicBtn.innerHTML = "🔇";
-      } else {
-        bgMusic.pause();
-        musicBtn.innerHTML = "🎵";
-      }
-    }
-    // Play music automatically on first user interaction (mobile fix)
-    document.body.addEventListener("click", () => {
-      bgMusic.play().catch(() => {});
-    }, { once: true });
+    const weddingVideo = document.getElementById("weddingVideo");
 
-    // RSVP Form Submit
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxX308Z8Gmv3DTqByiocoNjqu72dUp2TrOJc1QozWb9FqJzbFqnSiZzQLr4y5r_Q55Mrg/exec";
-    const form = document.getElementById("rsvpForm");
-    const successMsg = document.getElementById("successMsg");
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      fetch(scriptURL, { method: "POST", body: new FormData(form) })
-        .then(() => {
-          successMsg.classList.remove("hidden");
-          form.reset();
-        })
-        .catch(err => alert("Something went wrong! " + err.message));
+    // Attempt autoplay immediately
+    window.addEventListener("load", async () => {
+      try {
+        await weddingVideo.play();
+        await bgMusic.play();
+      } catch (e) {
+        console.log("Trying silent unmute trick...");
+        bgMusic.muted = true;
+        await bgMusic.play();
+        setTimeout(() => {
+          bgMusic.muted = false; // Unmute after start
+        }, 500);
+      }
     });
   </script>
 </body>
